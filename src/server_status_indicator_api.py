@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
 
-
 from .database import get_services
+from .logger import log
 from .scheduler import initialize_check_schedulers
 
 
@@ -9,6 +9,7 @@ def create_app():
     """Service Status indicator API"""
     app = Flask(__name__)
 
+    log('Initialize checking schedulers')
     initialize_check_schedulers('services.json', 60)
 
     @app.route('/services')
@@ -16,7 +17,7 @@ def create_app():
         """Return the list of services along with there status"""
         return jsonify(get_services())
 
-    print('Listening ...')
+    log('Listening ...')
     return app
 
 

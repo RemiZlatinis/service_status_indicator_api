@@ -1,6 +1,6 @@
 import sqlite3
 
-
+from .logger import log, error
 from .types import ServiceStatus
 
 DATABASE_FILENAME = 'data.db'
@@ -12,8 +12,9 @@ try:
     _c.execute('''CREATE TABLE services (label text, status text)''')
     _conn.commit()
     _conn.close()
+    log('Database initlilized')
 except sqlite3.OperationalError as e:
-    print(f"Error on database initialize: {e}")
+    error(f"Error on database initialize: {e}")
 
 
 def get_services() -> dict[str, str]:
