@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 from .database import save_service
-from .types import ServiceStatus
+from .models import ServiceStatus
 
 
 def initialize_check_schedulers(services_filepath: Path, default_interval: int):
