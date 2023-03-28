@@ -6,7 +6,7 @@ from .scheduler import initialize_check_schedulers
 
 
 def create_app():
-    """Service Status indicator API"""
+    """Service Status Indicator API"""
     app = Flask(__name__)
 
     log('Initialize checking schedulers')
