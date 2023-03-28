@@ -1,7 +1,7 @@
 import sqlite3
 
-from .logger import log, error
-from .models import ServiceStatus
+from logger import log, error
+from models import ServiceStatus
 
 DATABASE_FILENAME = 'data.db'
 

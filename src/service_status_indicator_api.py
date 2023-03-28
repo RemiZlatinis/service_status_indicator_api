@@ -1,9 +1,9 @@
 import os
 from flask import Flask, jsonify, request
 
-from .database import get_services
-from .logger import log, error
-from .scheduler import initialize_check_schedulers
+from database import get_services
+from logger import log, error
+from scheduler import initialize_check_schedulers
 
 TOKEN = os.environ.get("SERVICE_STATUS_INDICATOR_API_TOKEN", None)
 

@@ -5,8 +5,8 @@ import time
 from pathlib import Path
 
 
-from .database import save_service
-from .models import ServiceStatus
+from database import save_service
+from models import ServiceStatus
 
 
 def initialize_check_schedulers(services_filepath: Path, default_interval: int):
