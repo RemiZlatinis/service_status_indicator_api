@@ -1,8 +1,15 @@
-from flask import Flask, jsonify
+import os
+from flask import Flask, jsonify, request
 
 from .database import get_services
-from .logger import log
+from .logger import log, error
 from .scheduler import initialize_check_schedulers
+
+TOKEN = os.environ.get("SERVICE_STATUS_INDICATOR_API_TOKEN", None)
+
+if not TOKEN:
+    error("SERVICE_STATUS_INDICATOR_API_TOKEN environment variable not set")
+    exit(1)
 
 
 def create_app():
@@ -15,6 +22,11 @@ def create_app():
     @app.route('/services')
     def services():
         """Return the list of services along with there status"""
+        # Check if is an authenticated request
+        token = request.headers.get('Authorization')
+        if token != f'Token {TOKEN}':
+            return jsonify({'error': 'Unauthorized access'}), 401
+
         return jsonify(get_services())
 
     log('Listening ...')
