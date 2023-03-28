@@ -24,7 +24,7 @@ read -p "Enter a default check interval in seconds [default: 60]: " interval
 if [[ -z "$interval" ]]; then
   interval="60"
 fi
-echo $min_interval > /etc/service-status-indicator-api/.service_status_indicator_default_update_interval
+echo $interval > /etc/service-status-indicator-api/.service_status_indicator_default_update_interval
 
 
 # Generate a key
