@@ -8,7 +8,8 @@ fi
 
 # Copy essential files
 cp -p -r ./src/ /etc/service-status-indicator-api/
-
+# Create an empty services file
+echo "[]" > /etc/service-status-indicator-api/services.json
 
 # Ask for running port
 read -p "Enter a PORT for the API [default: 8000]: " port
