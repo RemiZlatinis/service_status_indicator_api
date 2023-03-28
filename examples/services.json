@@ -1,0 +1,11 @@
+[
+  {
+    "label": "The Simplest Service Demo",
+    "check-script": "./scripts/checks-simplest-service.sh"
+  },
+  {
+    "label": "System Updates",
+    "check-script": "./scripts/checks-system-updates.sh",
+    "check-interval": 300
+  }
+]
