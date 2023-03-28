@@ -5,14 +5,14 @@ from database import get_services
 from logger import log, error
 from scheduler import initialize_check_schedulers
 
-TOKEN = os.environ.get("SERVICE_STATUS_INDICATOR_API_TOKEN", None)
+TOKEN = os.environ.get('SERVICE_STATUS_INDICATOR_API_TOKEN', None)
 
 if not TOKEN:
-    error("SERVICE_STATUS_INDICATOR_API_TOKEN environment variable not set")
+    error('SERVICE_STATUS_INDICATOR_API_TOKEN environment variable not set')
     exit(1)
 
 DEFAULT_UPDATE_INTERVAL = int(os.environ.get(
-    "SERVICE_STATUS_INDICATOR_DEFAULT_UPDATE_INTERVAL", 60))
+    'SERVICE_STATUS_INDICATOR_DEFAULT_UPDATE_INTERVAL', 60))
 SERVICES_FILE_PATH = '/etc/service-status-indicator-api/services.json'
 
 

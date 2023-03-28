@@ -14,7 +14,7 @@ try:
     _conn.close()
     log('Database initlilized')
 except sqlite3.OperationalError as e:
-    error(f"Error on database initialize: {e}")
+    error(f'Error on database initialize: {e}')
 
 
 def get_services() -> dict[str, str]:
@@ -30,7 +30,7 @@ def get_services() -> dict[str, str]:
     try:
         conn = sqlite3.connect(DATABASE_FILENAME)
         cursor = conn.cursor()
-        cursor.execute("SELECT label, status FROM services")
+        cursor.execute('SELECT label, status FROM services')
         rows = cursor.fetchall()
 
         services = {}
@@ -41,7 +41,7 @@ def get_services() -> dict[str, str]:
         conn.close()
         return services
     except sqlite3.OperationalError as error:
-        print(f"Error on getting services: {error}")
+        error(f'Error on getting services: {error}')
 
 
 def save_service(label: str, status: ServiceStatus):
@@ -56,13 +56,13 @@ def save_service(label: str, status: ServiceStatus):
         OperationalError: When database is unreachable.
     """
     # cursor = conn.cursor()
-    # cursor.execute("DELETE FROM services")
+    # cursor.execute("DELETE FROM services')
     try:
         conn = sqlite3.connect(DATABASE_FILENAME)
         conn.execute(
-            "INSERT INTO services (label, status) VALUES (?, ?)", (label, status))
+            'INSERT INTO services(label, status) VALUES(?, ?)', (label, status))
         conn.commit()
     except sqlite3.OperationalError as error:
-        print(f"Error on saving service: {error}")
+        error(f'Error on saving service: {error}')
     finally:
         conn.close()
