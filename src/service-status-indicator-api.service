@@ -1,0 +1,13 @@
+[Unit]
+Description=Service Status Indicator API
+After=network.target
+
+[Service]
+ExecStart=/etc/service-status-indicator-api/start-server.sh
+Restart=always
+StandardOutput=append:/var/log/service-status-indicator-api.log
+StandardError=append:/var/log/service-status-indicator-api.log
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
