@@ -3,7 +3,7 @@ from flask import Flask, jsonify, request
 
 from database import get_services
 from logger import log, error
-from scheduler import initialize_check_schedulers
+from scheduler import initialize_check_schedulers, update_all_services_status
 
 TOKEN = os.environ.get('SERVICE_STATUS_INDICATOR_API_TOKEN', None)
 
@@ -22,7 +22,9 @@ def create_app():
 
     log(f'Default update interval: {DEFAULT_UPDATE_INTERVAL}s')
     log(f'Services file: {SERVICES_FILE_PATH}')
-    log('Initialize checking schedulers')
+    log('Initialize services status')
+    update_all_services_status(SERVICES_FILE_PATH)
+    log('Start checking schedulers')
     initialize_check_schedulers(SERVICES_FILE_PATH, DEFAULT_UPDATE_INTERVAL)
 
     @app.route('/services')

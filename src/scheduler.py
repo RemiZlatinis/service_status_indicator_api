@@ -9,6 +9,24 @@ from database import save_service
 from models import ServiceStatus
 
 
+def update_all_services_status(services_filepath: Path):
+    """Runs check script and update all services status.
+
+    Raises:
+        IOError: When the give services file does not exist.
+    """
+    if isinstance(services_filepath, str):
+        services_filepath = Path(services_filepath)
+
+    if not services_filepath.exists():
+        raise IOError('Services file does not exist')
+
+    with open(services_filepath, encoding='utf-8') as file:
+        services = json.load(file)
+        for service in services:
+            update_service_status(service)
+
+
 def initialize_check_schedulers(services_filepath: Path, default_interval: int):
     """Initialize schedulers for each service based on give services file content.
 
