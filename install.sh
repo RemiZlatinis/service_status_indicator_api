@@ -6,10 +6,10 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
-# Copy essential files
+# Initialize essential 
 cp -p -r ./src/ /etc/service-status-indicator-api/
-# Create an empty services file
 echo "[]" > /etc/service-status-indicator-api/services.json
+mkdir /etc/service-status-indicator-api/scripts
 
 # Ask for running port
 read -p "Enter a PORT for the API [default: 8000]: " port
@@ -26,6 +26,12 @@ if [[ -z "$interval" ]]; then
   interval="60"
 fi
 echo $interval > /etc/service-status-indicator-api/.service_status_indicator_default_update_interval
+
+
+# Prompt for predefined services
+cd ./examples/
+source ./add-predefined-services.sh
+cd ..
 
 
 # Generate a key

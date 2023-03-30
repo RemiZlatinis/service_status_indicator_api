@@ -1,0 +1,6 @@
+[
+  {
+    "label": "System Updates",
+    "description": "Checks if the system is updated via the system's package manager.\n(Supported package managers: apt, pacman)"
+  }
+]
