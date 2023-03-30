@@ -26,6 +26,16 @@ After running the `install.sh` script, you can access the API by navigating to h
 Note: The Service Status Indicator is currently only supported on Linux.
 
 ## Usage
+This API is designed to be used as a backend for the front-end client, which is a system indicator that displays the status of various services of a Linux system. The Service Status Indicator API runs as a system service with Gunicorn, which is a WSGI HTTP Server.
+
+Once the server is running, you can access the API by sending HTTP authenticated requests to http://localhost:8000/services. You can use a tool like `curl` or `Postman` to send requests to the API.
+```
+curl -H 'AUTHORIZATION: Token <Your-Token>' http://localhost:8000/services
+```
+Response:
+```json
+{"System Updates":"ok"}
+```
 
 ## Contributing
 
