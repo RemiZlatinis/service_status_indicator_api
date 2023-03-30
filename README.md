@@ -52,7 +52,7 @@ Response:
 
 ## Contributing
 
-If you would like to contribute to the Service Status Indicator API, please read the CONTRIBUTING.md file for guidelines on how to contribute to the project.
+If you would like to contribute to the Service Status Indicator API, please read the [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines on how to contribute to the project.
 
 ## Credits
 
