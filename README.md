@@ -43,8 +43,8 @@ If you would like to contribute to the Service Status Indicator API, please read
 
 ## Credits
 
-The Service Status Indicator API was created by Apostolos Zlatinis and is licensed under the [License] license.
+The Service Status Indicator API was created by Apostolos Zlatinis and is licensed under the GPLv2 license.
 
 ## License
 
-This project is licensed under the [License] license. See the LICENSE.md file for details.
+This project is licensed under the GPLv2 license. See the [LICENSE.md](LICENSE.md) file for details.
