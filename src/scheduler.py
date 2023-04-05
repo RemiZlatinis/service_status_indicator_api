@@ -57,6 +57,7 @@ def update_service_status(service):
 
         Returns: ServiceStatus 
     """
+    log(f'Updating {service}')
     label = service['label']
     check_script_filepath = service['check-script']
 
