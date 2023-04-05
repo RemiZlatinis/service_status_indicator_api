@@ -40,8 +40,8 @@ def get_services() -> dict[str, str]:
 
         conn.close()
         return services
-    except sqlite3.OperationalError as error:
-        error(f'Error on getting services: {error}')
+    except sqlite3.OperationalError as err:
+        error(f'Error on getting services: {err}')
 
 
 def save_service(label: str, status: ServiceStatus):
@@ -62,7 +62,7 @@ def save_service(label: str, status: ServiceStatus):
         conn.execute(
             'INSERT INTO services(label, status) VALUES(?, ?)', (label, status))
         conn.commit()
-    except sqlite3.OperationalError as error:
-        error(f'Error on saving service: {error}')
+    except sqlite3.OperationalError as err:
+        error(f'Error on saving service: {err}')
     finally:
         conn.close()
