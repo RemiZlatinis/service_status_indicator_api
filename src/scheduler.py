@@ -47,12 +47,12 @@ def update_service_status(service):
     if not Path(check_script_filepath).exists():
         raise IOError(f"{check_script_filepath} file does not exist")
 
-    status = (
-        subprocess.check_output(["bash", check_script_filepath])
-        .decode("utf-8")
-        .strip()
-        .splitlines()[-1]
-    )
+    try:
+        result = subprocess.run(['bash', check_script_filepath],
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+        status = result.stdout.decode('utf-8').strip().splitlines()[-1]
+    except subprocess.CalledProcessError as error:
+        status = f"ERROR: {error.stderr.decode('utf-8').strip()}"
 
     if status in typing.get_args(ServiceStatus):
         save_service(label, status)  # type: ignore
