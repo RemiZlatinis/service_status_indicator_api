@@ -1,23 +1,23 @@
 import sqlite3
 
-from logger import log, error
-from models import ServiceStatus
+from src.logger import log, error
+from src.models import ServiceStatus
 
-DATABASE_FILENAME = 'data.db'
+DATABASE_FILENAME = "data.db"
 
 # Initialize the database
 try:
     _conn = sqlite3.connect(DATABASE_FILENAME)
     _c = _conn.cursor()
-    _c.execute('''CREATE TABLE services (label text, status text)''')
+    _c.execute("""CREATE TABLE services (label text, status text)""")
     _conn.commit()
     _conn.close()
-    log('Database initlilized')
+    log("Database initlilized")
 except sqlite3.OperationalError as e:
-    error(f'Error on database initialize: {e}')
+    error(f"Error on database initialize: {e}")
 
 
-def get_services() -> dict[str, str]:
+def get_services() -> dict[str, ServiceStatus] | None:
     """
     Returns the latest status of services.
 
@@ -27,21 +27,20 @@ def get_services() -> dict[str, str]:
     Returns: A dictionary that contains key-value pairs of services label and status.
     `Example: {'service_1': 'ok', 'service_2': 'update'}`
     """
-    try:
-        conn = sqlite3.connect(DATABASE_FILENAME)
-        cursor = conn.cursor()
-        cursor.execute('SELECT label, status FROM services')
-        rows = cursor.fetchall()
+    with sqlite3.connect(DATABASE_FILENAME) as conn:
+        try:
+            cursor = conn.cursor()
+            cursor.execute("SELECT label, status FROM services")
+            rows = cursor.fetchall()
 
-        services = {}
-        for row in rows:
-            label, status = row
-            services[label] = status
+            services: dict[str, ServiceStatus] = {}
+            for row in rows:
+                label, status = row
+                services[label] = status
 
-        conn.close()
-        return services
-    except sqlite3.OperationalError as err:
-        error(f'Error on getting services: {err}')
+            return services
+        except sqlite3.OperationalError as err:
+            error(f"Error on getting services: {err}")
 
 
 def save_service(label: str, status: ServiceStatus):
@@ -55,14 +54,11 @@ def save_service(label: str, status: ServiceStatus):
     Raises:
         OperationalError: When database is unreachable.
     """
-    # cursor = conn.cursor()
-    # cursor.execute("DELETE FROM services')
-    try:
-        conn = sqlite3.connect(DATABASE_FILENAME)
-        conn.execute(
-            'INSERT INTO services(label, status) VALUES(?, ?)', (label, status))
-        conn.commit()
-    except sqlite3.OperationalError as err:
-        error(f'Error on saving service: {err}')
-    finally:
-        conn.close()
+    with sqlite3.connect(DATABASE_FILENAME) as conn:
+        try:
+            conn.execute(
+                "INSERT INTO services(label, status) VALUES(?, ?)", (label, status)
+            )
+            conn.commit()
+        except sqlite3.OperationalError as err:
+            error(f"Error on saving service: {err}")
