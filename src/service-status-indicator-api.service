@@ -5,6 +5,7 @@ After=network.target
 [Service]
 ExecStart=/etc/service-status-indicator-api/start-server.sh
 Restart=always
+RestartSec=10
 StandardOutput=append:/var/log/service-status-indicator-api.log
 StandardError=append:/var/log/service-status-indicator-api.log
 Environment=PYTHONUNBUFFERED=1
