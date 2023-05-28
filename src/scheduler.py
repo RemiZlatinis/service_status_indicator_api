@@ -6,9 +6,9 @@ import typing
 from pathlib import Path
 
 
-from src.database import save_service
-from src.models import ServiceStatus
-from src.logger import log
+from database import save_service
+from models import ServiceStatus
+from logger import log
 
 
 def update_all_services_status(services_filepath: Path):

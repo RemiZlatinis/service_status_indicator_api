@@ -3,9 +3,9 @@ from pathlib import Path
 
 from flask import Flask, jsonify, request
 
-from src.database import get_services
-from src.logger import log, error
-from src.scheduler import initialize_check_schedulers, update_all_services_status
+from database import get_services
+from logger import log, error
+from scheduler import initialize_check_schedulers, update_all_services_status
 
 TOKEN = os.environ.get('SERVICE_STATUS_INDICATOR_API_TOKEN', None)
 
