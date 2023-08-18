@@ -1,4 +1,9 @@
-# Service Status Indicator API
+# Deprecated
+Check this repository instead: [Service Status Indicator](https://github.com/RemiZlatinis/service_status_indicator)
+
+Or the site: [Site](https://service-status-indicator.remiservices.uk/) 
+
+## Service Status Indicator API
 
 ## Description
 
